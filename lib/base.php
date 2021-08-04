@@ -407,6 +407,10 @@ class OC {
 	}
 
 	public static function initSession() {
+		if (self::$server->getRequest()->getHeader('Authorization') !== '') {
+			// Do not initialize the session if a request is authenticated directly
+			return;
+		}
 		if (self::$server->getRequest()->getServerProtocol() === 'https') {
 			ini_set('session.cookie_secure', 'true');
 		}
