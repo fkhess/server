@@ -66,7 +66,7 @@ trait Auth {
 			} else {
 				$options = [];
 			}
-			if ($authHeader) {
+			if ($authHeader && !$useCookies) {
 				$options['headers'] = [
 					'Authorization' => $authHeader
 				];
@@ -111,6 +111,11 @@ trait Auth {
 			'cookies' => $this->cookieJar,
 		];
 
+		if ($loginViaWeb) {
+			// Session cookies are used instead
+			unset($options['auth']);
+		}
+
 		try {
 			$this->response = $client->request('POST', $fullUrl, $options);
 		} catch (\GuzzleHttp\Exception\ServerException $e) {
@@ -138,7 +143,6 @@ trait Auth {
 					'filesystem' => false,
 				],
 			],
-			'cookies' => $this->cookieJar,
 		];
 		$this->response = $client->request('PUT', $fullUrl, $options);
 		$this->restrictedClientToken = $tokenObj->token;
