@@ -30,6 +30,7 @@
  */
 namespace OC\Console;
 
+use OC\Core\Application as CoreApplication;
 use OC\MemoryInfo;
 use OC\NeedsUpdateException;
 use OC_App;
@@ -69,6 +70,8 @@ class Application {
 		$this->request = $request;
 		$this->logger = $logger;
 		$this->memoryInfo = $memoryInfo;
+		/* Build core application to make sure that listeners are registered */
+		\OC::$server->query(CoreApplication::class);
 	}
 
 	/**
