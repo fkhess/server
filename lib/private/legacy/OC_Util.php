@@ -308,7 +308,7 @@ class OC_Util {
 	}
 
 	/**
-	 * Can be set up
+	 * Setup the file system
 	 *
 	 * @param string|null $user
 	 * @return boolean
