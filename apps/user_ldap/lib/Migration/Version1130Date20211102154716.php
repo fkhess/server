@@ -57,17 +57,6 @@ class Version1130Date20211102154716 extends SimpleMigrationStep {
 		foreach (['ldap_user_mapping', 'ldap_group_mapping'] as $tableName) {
 			$this->processDuplicateUUIDs($tableName);
 		}
-
-		/** @var ISchemaWrapper $schema */
-		$schema = $schemaClosure();
-		if ($schema->hasTable('ldap_group_mapping_backup')) {
-			// Previous upgrades of a broken release might have left an incomplete
-			// ldap_group_mapping_backup table. No need to recreate, but it
-			// should be empty.
-			// TRUNCATE is not available from Query Builder, but faster than DELETE FROM.
-			$sql = $this->dbc->getDatabasePlatform()->getTruncateTableSQL('ldap_group_mapping_backup', false);
-			$this->dbc->executeStatement($sql);
-		}
 	}
 
 	/**
@@ -200,6 +189,7 @@ class Version1130Date20211102154716 extends SimpleMigrationStep {
 		foreach ($uuids as $uuid) {
 			array_push($idsWithUuidToInvalidate, ...$this->getNextcloudIdsByUuid($table, $uuid));
 		}
+		$this->invalidateUuids($table, $idsWithUuidToInvalidate);
 	}
 
 	/**
