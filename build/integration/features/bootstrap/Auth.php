@@ -133,7 +133,6 @@ trait Auth {
 		$fullUrl = substr($this->baseUrl, 0, -5) . '/index.php/settings/personal/authtokens/' . $newCreatedTokenId;
 		$client = new Client();
 		$options = [
-			'auth' => ['user0', '123456'],
 			'headers' => [
 				'requesttoken' => $this->requestToken,
 			],
@@ -143,6 +142,7 @@ trait Auth {
 					'filesystem' => false,
 				],
 			],
+			'cookies' => $this->cookieJar,
 		];
 		$this->response = $client->request('PUT', $fullUrl, $options);
 		$this->restrictedClientToken = $tokenObj->token;
