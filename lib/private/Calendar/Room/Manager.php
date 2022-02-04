@@ -33,7 +33,6 @@ use OCP\Calendar\Room\IManager;
 use OCP\IServerContainer;
 
 class Manager implements IManager {
-
 	private Coordinator $bootstrapCoordinator;
 
 	private IServerContainer $server;
@@ -88,7 +87,7 @@ class Manager implements IManager {
 			return;
 		}
 
-		foreach($context->getCalendarRoomBackendRegistrations() as $registration) {
+		foreach ($context->getCalendarRoomBackendRegistrations() as $registration) {
 			$this->backends[] = $registration->getService();
 		}
 	}
