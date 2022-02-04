@@ -30,7 +30,7 @@ declare(strict_types=1);
 namespace OC\AppFramework\Bootstrap;
 
 use Closure;
-use OCP\Calendar\Resource\IBackend as IResouceBackend;
+use OCP\Calendar\Resource\IBackend as IResourceBackend;
 use OCP\Calendar\Room\IBackend as IRoomBackend;
 use OCP\Talk\ITalkBackend;
 use RuntimeException;
@@ -72,7 +72,7 @@ class RegistrationContext {
 	/** @var null|ServiceRegistration<ITalkBackend> */
 	private $talkBackendRegistration = null;
 
-	/** @var ServiceRegistration<IResouceBackend>[] */
+	/** @var ServiceRegistration<IResourceBackend>[] */
 	private $calendarResourceBackendRegistrations = [];
 
 	/** @var ServiceRegistration<IRoomBackend>[] */
@@ -674,7 +674,7 @@ class RegistrationContext {
 
 	/**
 	 * @return ServiceRegistration[]
-	 * @psalm-return ServiceRegistration<IResouceBackend>[]
+	 * @psalm-return ServiceRegistration<IResourceBackend>[]
 	 */
 	public function getCalendarResourceBackendRegistrations() {
 		return $this->calendarResourceBackendRegistrations;
