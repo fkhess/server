@@ -682,7 +682,7 @@ class RegistrationContext {
 
 	/**
 	 * @return ServiceRegistration[]
-	 * @psalm-return ServiceRegistration<IRoomBackend[]
+	 * @psalm-return ServiceRegistration<IRoomBackend>[]
 	 */
 	public function getCalendarRoomBackendRegistrations(): array {
 		return $this->calendarRoomBackendRegistrations;
