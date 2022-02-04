@@ -136,7 +136,6 @@ trait Auth {
 			'auth' => ['user0', '123456'],
 			'headers' => [
 				'requesttoken' => $this->requestToken,
-				'OCS-APIREQUEST' => 'true',
 			],
 			'json' => [
 				'name' => md5(microtime()),

@@ -207,10 +207,7 @@ class SecurityMiddleware extends Middleware {
 			 * This allows oauth apps (e.g. moodle) to use the OCS endpoints
 			 */
 			if (!$this->request->passesCSRFCheck() && !(
-						(
-							$controller instanceof OCSController ||
-							$controller instanceof Controller
-						) && (
+					$controller instanceof OCSController && (
 						$this->request->getHeader('OCS-APIREQUEST') === 'true' ||
 						strpos($this->request->getHeader('Authorization'), 'Bearer ') === 0
 					)
