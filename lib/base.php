@@ -407,9 +407,7 @@ class OC {
 	}
 
 	public static function initSession() {
-		$basicAuthCookieUsage = self::$server->getConfig()->getSystemValueBool('auth.basic.cookies', true);
-
-		if ($basicAuthCookieUsage === false && self::$server->getRequest()->getHeader('Authorization') !== '') {
+		if (self::$server->getRequest()->getHeader('Authorization') !== '') {
 			// Do not initialize the session if a request is authenticated directly
 			return;
 		}
